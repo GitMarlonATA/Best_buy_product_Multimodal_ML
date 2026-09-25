@@ -1,0 +1,24 @@
+# ---------------------------------------------------------------------------
+# Colab (Python 3.13, TensorFlow 2.20, GPU)
+#
+# NO instalar pandas / numpy / torch / tensorflow / scikit-learn:
+# Colab ya los trae compilados contra su CUDA. Los pines de requirements.txt
+# son de la epoca de Python 3.9/3.10 y no tienen wheels para 3.13, asi que
+# pip cae a compilar desde source y falla.
+#
+# tensorflow-gpu tampoco: desde la 2.12 es un paquete stub que falla a
+# proposito. El soporte GPU vive dentro de `tensorflow` desde la 2.1.
+# ---------------------------------------------------------------------------
+
+# Keras 2 legacy -> devuelve ImageDataGenerator y keras.utils.Sequence,
+# y es lo que los modelos TF de transformers necesitan.
+# ~=2.20.0 para que matchee el TF 2.20 de Colab (2.21 pediria TF 2.21).
+tf-keras~=2.20.0
+
+# Ultima linea 4.x: todavia expone TFViTModel / TFSwinModel / TFConvNextV2Model
+# (v5 elimino TensorFlow por completo) y depende de tokenizers>=0.22, que
+# publica wheels abi3 validas en Python 3.13.
+transformers>=4.57,<5
+
+openai>=1.40,<3
+python-dotenv==1.0.1
